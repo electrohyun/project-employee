@@ -1,159 +1,77 @@
-# Turborepo starter
+<div align="center">
 
-This Turborepo starter is maintained by the Turborepo core team.
+<img src="https://ik.imagekit.io/electrohyun/project_imployee_header0.png" alt="프로젝트 임플로이 헤더 사진">
 
-## Using this example
+### 🏃‍♂️ 인트라넷에서 살아남기 'Project: Employee' 🤖
 
-Run the following command:
+</div>
 
-```sh
-npx create-turbo@latest
-```
+# 🚀 소개
 
-## What's inside?
+- '프로젝트: 임플로이'는 ARG를 표방하는 미스터리 어드벤처 웹 게임입니다. 플레이어는 AI 구성원들로 이루어진 회사의 인트라넷에 접속하여, 회사의 비밀을 밝혀내야 합니다. 플레이어에게 어떤 미래가 기다리고 있을까요?
 
-This Turborepo includes the following packages/apps:
+# 🛠️ 사용 라이브러리 & 스택
 
-### Apps and Packages
+### 🖼️ Framework & Language
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+|                                                            Next.js                                                             |                                                            React                                                             |                                                            TypeScript                                                             |
+| :----------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/next_js.png" width="50"> | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" width="50"> | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/typescript.png" width="50"> |
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+### 🛠️ Infrastructure & Backend
 
-### Utilities
+|                                                            Turborepo                                                             |                                                            Supabase                                                             |
+| :------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------: |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/turborepo.png" width="50"> | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/supabase.png" width="50"> |
 
-This Turborepo has some additional tools already setup for you:
+### 🔄 State & Data
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+|                               TanStack Query                                |                                                          Zustand                                                           |
+| :-------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------: |
+| <img src="https://tanstack.com/images/logos/logo-color-600.png" width="50"> | <img src="https://user-images.githubusercontent.com/958486/218346783-72be5ae3-b953-4dd7-b239-788a882fdad6.svg" width="50"> |
 
-### Build
+### 👗 Styling
 
-To build all apps and packages, run the following command:
+|                                                            Tailwind CSS                                                             |
+| :---------------------------------------------------------------------------------------------------------------------------------: |
+| <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/tailwind_css.png" width="50"> |
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+### 📄 Testing & Docs
 
-```sh
-cd my-turborepo
-turbo build
-```
+|                                                                                           Vitest                                                                                           |                           React Testing Library                            |                                                                                            Playwright                                                                                            |                                                                                                Storybook                                                                                                |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| <img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/5/vitest-1c3qaaziljmyt9fer4ybrm.png/vitest-4k5bpolhfo3mhu87zo5kz.png?_a=DATAiZAAZAA0" width="50"> | <img src="https://testing-library.com/img/octopus-128x128.png" width="50"> | <img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/2/playwright-y50bnthygb3rvsppvkm9e.png/playwright-q55xzpenhgjsodksybst.png?_a=DATAiZAAZAA0" width="50"> | <img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/4/storybook-icon-9dw6zi64ttqu94tu5xs.png/storybook-icon-k1ehpvvp0t9hz1w9sdxxn.png?_a=DATAiZAAZAA0" width="50"> |
 
-Without global `turbo`, use your package manager:
+# 📝 커밋 메시지 작업명
 
-```sh
-cd my-turborepo
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
-```
+- `feat` : 새로운 기능 추가
+- `refactor` : 코드 리펙토링
+- `publish` : 순수 UI 작업
+- `fix` : 버그 수정, 충돌 해결
+- `docs` : 문서 수정
+- `test` : 테스트 코드, 리펙토링 테스트 코드 추가
+- `chore` : 빌드 업무 수정, 패키지 매니저 수정
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+# 🤝 컨벤션
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+- 이슈 이름 컨벤션: `[Feat] 로그인 기능 구현`
+- 브랜치 이름 컨벤션: `feat/login-implementation/33`
+- 커밋 메세지 컨벤션: `feat: (#33) 로그인 기능 구현`
+- PR 이름 컨벤션: `feat: (#33) 로그인 기능 구현`
 
-```sh
-turbo build --filter=docs
-```
+# 📅 개발 기간
 
-Without global `turbo`:
+- 2026.03. - 2026.06. (예정)
 
-```sh
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+# 👥 멤버
 
-### Develop
-
-To develop all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo dev --filter=web
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/electrohyun.png" width="150"/><br/>
+      정기현<br>
+      <strong>Electrohyun</strong><br>
+      <a href="https://github.com/electrohyun">@electrohyun</a>
+    </td>
+  </tr>
+</table>
