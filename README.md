@@ -14,33 +14,33 @@
 
 ### 🖼️ Framework & Language
 
-|                                                            Next.js                                                             |                                                            React                                                             |                                                            TypeScript                                                             |
-| :----------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: |
+| Next.js | React | TypeScript |
+| :-----: | :---: | :--------: |
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/next_js.png" width="50"> | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/react.png" width="50"> | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/typescript.png" width="50"> |
 
 ### 🛠️ Infrastructure & Backend
 
-|                                                            Turborepo                                                             |                                                            Supabase                                                             |
-| :------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------: |
+| Turborepo | Supabase |
+| :-------: | :------: |
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/turborepo.png" width="50"> | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/supabase.png" width="50"> |
 
 ### 🔄 State & Data
 
-|                               TanStack Query                                |                                                          Zustand                                                           |
-| :-------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------: |
+| TanStack Query | Zustand |
+| :-------------: | :-----: |
 | <img src="https://tanstack.com/images/logos/logo-color-600.png" width="50"> | <img src="https://user-images.githubusercontent.com/958486/218346783-72be5ae3-b953-4dd7-b239-788a882fdad6.svg" width="50"> |
 
 ### 👗 Styling
 
-|                                                            Tailwind CSS                                                             |
-| :---------------------------------------------------------------------------------------------------------------------------------: |
+| Tailwind CSS |
+| :----------: |
 | <img src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/tailwind_css.png" width="50"> |
 
 ### 📄 Testing & Docs
 
-|                                                                                           Vitest                                                                                           |                           React Testing Library                            |                                                                                            Playwright                                                                                            |                                                                                                Storybook                                                                                                |
-| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/5/vitest-1c3qaaziljmyt9fer4ybrm.png/vitest-4k5bpolhfo3mhu87zo5kz.png?_a=DATAiZAAZAA0" width="50"> | <img src="https://testing-library.com/img/octopus-128x128.png" width="50"> | <img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/2/playwright-y50bnthygb3rvsppvkm9e.png/playwright-q55xzpenhgjsodksybst.png?_a=DATAiZAAZAA0" width="50"> | <img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/4/storybook-icon-9dw6zi64ttqu94tu5xs.png/storybook-icon-k1ehpvvp0t9hz1w9sdxxn.png?_a=DATAiZAAZAA0" width="50"> |
+| Vitest | React Testing Library | Playwright |
+| :----: | :-------------------: | :--------: |
+| <img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/5/vitest-1c3qaaziljmyt9fer4ybrm.png/vitest-4k5bpolhfo3mhu87zo5kz.png?_a=DATAiZAAZAA0" width="50"> | <img src="https://testing-library.com/img/octopus-128x128.png" width="50"> | <img src="https://assets.streamlinehq.com/image/private/w_300,h_300,ar_1/f_auto/v1/icons/2/playwright-y50bnthygb3rvsppvkm9e.png/playwright-q55xzpenhgjsodksybst.png?_a=DATAiZAAZAA0" width="50"> |
 
 # 📝 커밋 메시지 작업명
 
