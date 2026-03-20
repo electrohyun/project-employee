@@ -39,6 +39,7 @@ yarn-error.log*
 .agents/
 AGENTS.md
 skills-lock.json
+.coderabbit.yaml
 
 *storybook.log
 storybook-static
