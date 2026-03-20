@@ -57,6 +57,16 @@ reviews:
     base_branches:
       - develop
 
+  tools:
+    yamllint:
+      enabled: true
+    actionlint:
+      enabled: true
+    markdownlint:
+      enabled: true
+    gitleaks:
+      enabled: true
+
 chat:
   auto_reply: true
 
@@ -75,16 +85,3 @@ knowledge_base:
     scope: local
   pull_requests:
     scope: local
-
-tools:
-  yamllint:
-    enabled: true
-
-  actionlint:
-    enabled: true
-
-  markdownlint:
-    enabled: true
-
-  gitleaks:
-    enabled: true
