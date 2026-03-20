@@ -36,6 +36,9 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+.agents/
+AGENTS.md
+skills-lock.json
 
 *storybook.log
 storybook-static
