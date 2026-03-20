@@ -1,0 +1,87 @@
+language: "ko-KR"
+tone_instructions: >
+  한국어로 간결하고 건설적으로 리뷰하세요. 성능, 유지보수성, 접근성을 우선하고,
+  문제의 원인과 개선 방향을 함께 제시하세요. 이 저장소의 규칙과 문맥을 우선합니다.
+
+reviews:
+  profile: "chill"
+  high_level_summary: true
+  changed_files_summary: false
+  sequence_diagrams: false
+  review_status: true
+  collapse_walkthrough: false
+  request_changes_workflow: false
+  assess_linked_issues: true
+  related_issues: false
+  related_prs: false
+  suggested_labels: false
+  auto_apply_labels: false
+  suggested_reviewers: false
+  auto_assign_reviewers: false
+  poem: true
+  path_instructions:
+    - path: "apps/web/**"
+      instructions: |
+        Next.js App Router와 React 19 문맥을 기준으로 리뷰해주세요.
+        라우트 진입 파일은 얇게 유지되는지, 실제 구현이 src 내부로 적절히 분리되는지 확인해주세요.
+        TanStack Query, 접근성, 로딩/에러 상태, 불필요한 클라이언트 컴포넌트 사용 여부를 중점적으로 봐주세요.
+        일반론보다 현재 프로젝트 구조와 기존 패턴에 맞는 제안을 우선해주세요.
+    - path: "apps/web/src/**"
+      instructions: |
+        apps/web/src 내부는 FSD 흐름을 우선해 리뷰해주세요.
+        pages, widgets, features, entities, shared 각 계층의 책임이 섞이지 않는지 확인하고,
+        공용으로 내려가야 할 코드가 특정 화면 계층에 묶여 있거나, 반대로 화면 전용 코드가 shared로 올라가지 않았는지 봐주세요.
+        새 파일이나 새 폴더를 제안할 때도 기존 FSD 계층을 먼저 활용하는 방향을 우선해주세요.
+    - path: "apps/web/src/**/*.tsx"
+      instructions: |
+        React 컴포넌트 파일은 주된 export가 컴포넌트라면 파일 이름도 그 컴포넌트 이름과 맞는 UpperCamelCase 형태인지 확인해주세요.
+        props 타입은 단순히 Props처럼 두지 말고, 소유 컴포넌트가 드러나는 이름으로 선언되어 있는지 함께 봐주세요.
+        컴포넌트가 맡는 역할이 현재 FSD 계층과 맞는지도 같이 검토해주세요.
+    - path: "packages/ui/**"
+      instructions: |
+        공용 UI 컴포넌트의 재사용성, 타입 안정성, 스타일 일관성, 접근성을 중점적으로 리뷰해주세요.
+        특정 화면 전용 로직이 공용 패키지로 새어 들어오지 않는지도 함께 확인해주세요.
+    - path: ".github/**"
+      instructions: |
+        이슈 템플릿, PR 템플릿, CODEOWNERS 같은 협업 규칙 파일은
+        현재 저장소의 브랜치/PR 규칙과 일관되는지 중심으로 검토해주세요.
+    - path: ".coderabbit.yaml"
+      instructions: |
+        CodeRabbit 설정 파일은 YAML 문법, 지원되는 필드 사용 여부,
+        프로젝트 구조와의 정합성, 과도한 자동화로 인한 노이즈 여부를 중심으로 검토해주세요.
+
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    drafts: false
+    base_branches:
+      - develop
+
+  tools:
+    yamllint:
+      enabled: true
+    actionlint:
+      enabled: true
+    markdownlint:
+      enabled: true
+    gitleaks:
+      enabled: true
+
+chat:
+  auto_reply: true
+
+knowledge_base:
+  web_search:
+    enabled: false
+
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "README.md"
+      - ".github/pull_request_template.md"
+      - ".github/ISSUE_TEMPLATE/*.md"
+
+  issues:
+    scope: local
+  pull_requests:
+    scope: local

@@ -38,6 +38,7 @@ yarn-error.log*
 *.pem
 .agents/
 AGENTS.md
+.coderabbit.local.yaml
 skills-lock.json
 
 *storybook.log
