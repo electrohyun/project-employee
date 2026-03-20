@@ -17,9 +17,10 @@ assignees: electrohyun
 
 ## ✅ TO-DO
 
-- [ ] Job 1
-- [ ] Job 2
-- [ ] Job 3
+- 아래 체크 항목은 기본 예시라 처음부터 체크된 상태로 제공됩니다. 실제 작업에 맞게 항목과 체크 상태를 수정해주세요.
+- [x] Job 1
+- [x] Job 2
+- [x] Job 3
 
 ## ETC
 

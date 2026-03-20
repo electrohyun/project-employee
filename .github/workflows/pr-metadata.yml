@@ -1,0 +1,228 @@
+name: PR Metadata Sync
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - edited
+      - ready_for_review
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+  repository-projects: write
+
+jobs:
+  sync-pr-metadata:
+    if: github.event.pull_request.base.ref == 'develop'
+    runs-on: ubuntu-latest
+    env:
+      PROJECT_AUTOMATION_TOKEN: ${{ secrets.PROJECT_AUTOMATION_TOKEN }}
+    steps:
+      - name: Sync assignee, label, and milestone
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner
+            const repo = context.repo.repo
+            const pr = context.payload.pull_request
+            const number = pr.number
+            const title = pr.title ?? ''
+
+            const labelMap = {
+              Feat: '✨ Feature',
+              Refactor: '🛠️ Refactor',
+              Design: '🎨 Design',
+              Fix: '🐞 Fix',
+              Docs: '📘 Docs',
+              Test: '✅ Test',
+              Chore: '🔧 Chore',
+            }
+
+            const match = title.match(/^\[(Feat|Refactor|Design|Fix|Docs|Test|Chore)\]/)
+            if (!match) {
+              core.warning('PR 제목에서 라벨 키워드를 찾지 못했습니다. 제목 형식을 확인해주세요.')
+            }
+
+            const desiredLabel = match ? labelMap[match[1]] : null
+            const allManagedLabels = Object.values(labelMap)
+
+            await github.rest.issues.addAssignees({
+              owner,
+              repo,
+              issue_number: number,
+              assignees: [owner],
+            })
+
+            if (desiredLabel) {
+              const currentLabels = pr.labels.map((label) => label.name)
+              const labelsToRemove = currentLabels.filter(
+                (label) => allManagedLabels.includes(label) && label !== desiredLabel
+              )
+
+              for (const label of labelsToRemove) {
+                await github.rest.issues.removeLabel({
+                  owner,
+                  repo,
+                  issue_number: number,
+                  name: label,
+                }).catch(() => {})
+              }
+
+              if (!currentLabels.includes(desiredLabel)) {
+                await github.rest.issues.addLabels({
+                  owner,
+                  repo,
+                  issue_number: number,
+                  labels: [desiredLabel],
+                })
+              }
+            }
+
+            const milestones = await github.paginate(github.rest.issues.listMilestones, {
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100,
+            })
+
+            milestones.sort((left, right) => {
+              return new Date(right.created_at).getTime() - new Date(left.created_at).getTime()
+            })
+
+            const latestOpenMilestone = milestones[0]
+            if (latestOpenMilestone && pr.milestone?.number !== latestOpenMilestone.number) {
+              await github.rest.issues.update({
+                owner,
+                repo,
+                issue_number: number,
+                milestone: latestOpenMilestone.number,
+              })
+            }
+
+      - name: Sync project and status
+        if: ${{ env.PROJECT_AUTOMATION_TOKEN != '' }}
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ env.PROJECT_AUTOMATION_TOKEN }}
+          script: |
+            const owner = context.repo.owner
+            const repo = context.repo.repo
+            const prNumber = context.payload.pull_request.number
+
+            const query = `
+              query($owner: String!, $repo: String!, $prNumber: Int!) {
+                repository(owner: $owner, name: $repo) {
+                  pullRequest(number: $prNumber) {
+                    id
+                  }
+                }
+                user(login: $owner) {
+                  projectsV2(first: 20, orderBy: { field: CREATED_AT, direction: DESC }) {
+                    nodes {
+                      id
+                      title
+                      closed
+                      fields(first: 50) {
+                        nodes {
+                          ... on ProjectV2SingleSelectField {
+                            id
+                            name
+                            options {
+                              id
+                              name
+                            }
+                          }
+                        }
+                      }
+                      items(first: 100) {
+                        nodes {
+                          id
+                          content {
+                            ... on PullRequest {
+                              id
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `
+
+            const result = await github.graphql(query, {
+              owner,
+              repo,
+              prNumber,
+            })
+
+            const prId = result.repository.pullRequest.id
+            const projects = result.user?.projectsV2?.nodes?.filter((project) => !project.closed) ?? []
+
+            if (projects.length === 0) {
+              core.warning('열려 있는 GitHub Project를 찾지 못해 project/status 자동화를 건너뜁니다.')
+              return
+            }
+
+            const project = projects[0]
+            let item = project.items.nodes.find((node) => node.content?.id === prId)
+
+            if (!item) {
+              const addItemMutation = `
+                mutation($projectId: ID!, $contentId: ID!) {
+                  addProjectV2ItemById(input: { projectId: $projectId, contentId: $contentId }) {
+                    item {
+                      id
+                    }
+                  }
+                }
+              `
+
+              const added = await github.graphql(addItemMutation, {
+                projectId: project.id,
+                contentId: prId,
+              })
+
+              item = added.addProjectV2ItemById.item
+            }
+
+            const statusField = project.fields.nodes.find((field) => field.name === 'Status')
+            const doingOption = statusField?.options?.find((option) => option.name === 'Doing')
+
+            if (!statusField || !doingOption) {
+              core.warning('Status 또는 Doing 옵션을 찾지 못해 project status 자동화를 건너뜁니다.')
+              return
+            }
+
+            const updateFieldMutation = `
+              mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
+                updateProjectV2ItemFieldValue(
+                  input: {
+                    projectId: $projectId
+                    itemId: $itemId
+                    fieldId: $fieldId
+                    value: { singleSelectOptionId: $optionId }
+                  }
+                ) {
+                  projectV2Item {
+                    id
+                  }
+                }
+              }
+            `
+
+            await github.graphql(updateFieldMutation, {
+              projectId: project.id,
+              itemId: item.id,
+              fieldId: statusField.id,
+              optionId: doingOption.id,
+            })
+
+      - name: Notice missing project token
+        if: ${{ env.PROJECT_AUTOMATION_TOKEN == '' }}
+        run: |
+          echo "PROJECT_AUTOMATION_TOKEN secret is not configured."
+          echo "Project and Status automation were skipped."
