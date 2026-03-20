@@ -2,13 +2,13 @@
 
 <img src="https://ik.imagekit.io/electrohyun/project_imployee_header0.png" alt="프로젝트 임플로이 헤더 사진">
 
-### 🏃‍♂️ 인트라넷에서 살아남기 'Project: Employee' 🤖
+### 🏃‍♂️ Project Employee 🤖
 
 </div>
 
 # 🚀 소개
 
-- '프로젝트: 임플로이'는 ARG를 표방하는 미스터리 어드벤처 웹 게임입니다. 플레이어는 AI 구성원들로 이루어진 회사의 인트라넷에 접속하여, 회사의 비밀을 밝혀내야 합니다. 플레이어에게 어떤 미래가 기다리고 있을까요?
+- 추가 예정
 
 # 🛠️ 사용 라이브러리 & 스택
 
