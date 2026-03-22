@@ -5,7 +5,7 @@ import { AlertTriangle, Building2, RotateCcw } from "lucide-react";
 
 import { Button } from "@/shared/ui/button";
 
-interface ErrorPageProps {
+export interface ErrorPageProps {
   error: Error & { digest?: string };
   reset: () => void;
 }
