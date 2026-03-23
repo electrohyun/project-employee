@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { AppProviders } from "@/app/providers";
+import { ChatWidget } from "@/shared/ui/chat-widget";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -23,7 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={pretendard.variable}>
       <body>
-        <AppProviders>{children}</AppProviders>
+        <AppProviders>
+          {children}
+          <ChatWidget />
+        </AppProviders>
       </body>
     </html>
   );
