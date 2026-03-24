@@ -1,5 +1,5 @@
-import { RouteIndexPage } from "@/pages";
+import { RootPage } from "@/pages/root";
 
 export default function Page() {
-  return <RouteIndexPage />;
+  return <RootPage />;
 }

@@ -1,11 +1,6 @@
 "use client";
 
-import { ErrorPage } from "@/pages";
-
-interface ErrorPageProps {
-  error: Error & { digest?: string };
-  reset: () => void;
-}
+import { ErrorPage, type ErrorPageProps } from "@/pages/error";
 
 export default function RouteError({ error, reset }: ErrorPageProps) {
   return <ErrorPage error={error} reset={reset} />;
