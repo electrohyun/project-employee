@@ -14,6 +14,8 @@ export function LoginForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const demoEmployeeId = process.env.NEXT_PUBLIC_DEMO_EMPLOYEE_ID;
   const demoEmployeePassword = process.env.NEXT_PUBLIC_DEMO_EMPLOYEE_PASSWORD;
+  const errorMessageId = "login-error";
+  const hasError = Boolean(errorMessage);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -50,6 +52,8 @@ export function LoginForm() {
             placeholder="aegis-0123"
             className="pl-10"
             autoComplete="username"
+            aria-invalid={hasError}
+            aria-describedby={hasError ? errorMessageId : undefined}
             value={employeeId}
             onChange={(event) => setEmployeeId(event.target.value)}
           />
@@ -76,6 +80,8 @@ export function LoginForm() {
             placeholder="비밀번호를 입력하세요"
             className="pl-10"
             autoComplete="current-password"
+            aria-invalid={hasError}
+            aria-describedby={hasError ? errorMessageId : undefined}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
@@ -86,8 +92,13 @@ export function LoginForm() {
         보안 상태 정상. 현재 네트워크는 사내망으로 인식되었습니다.
       </div>
 
-      {errorMessage ? (
-        <div className="rounded-2xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm text-rose-900">
+      {hasError ? (
+        <div
+          id={errorMessageId}
+          role="alert"
+          aria-live="assertive"
+          className="rounded-2xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm text-rose-900"
+        >
           {errorMessage}
         </div>
       ) : null}
@@ -106,7 +117,7 @@ export function LoginForm() {
         <Button
           type="button"
           variant="outline"
-          size="lg"1
+          size="lg"
           className="h-11 w-full border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
         >
           게스트 로그인
