@@ -1,16 +1,16 @@
 import {
   AlertTriangle,
   ArrowRight,
-  Building2,
-  ClipboardList,
   Clock3,
   FileSearch,
 } from "lucide-react";
 import Link from "next/link";
-import { boardSections, incidentFeed, sidebarLinks, summarySlides } from "../mock/root-page";
+import { boardSections, incidentFeed, summarySlides } from "../mock/root-page";
 import { formatIntranetDateLabel } from "@/shared/lib/date";
 import { Button } from "@/shared/ui/button";
 import { LiveOperationsStatus } from "./LiveOperationsStatus";
+import { MobileRootNavigation } from "./MobileRootNavigation";
+import { RootNavigation } from "./RootNavigation";
 import { SummarySlider } from "./SummarySlider";
 
 const gameDateLabel = formatIntranetDateLabel(new Date());
@@ -24,67 +24,16 @@ export function RootPage() {
     <main className="min-h-screen bg-[linear-gradient(180deg,#d9e4ee_0%,#eef4f8_18%,#f6f8fb_100%)] px-4 py-4 text-slate-900 sm:px-6 sm:py-6">
       <div className="mx-auto flex min-h-[calc(100vh-2rem)] w-full max-w-[1600px] overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white/82 shadow-[0_30px_90px_rgba(15,23,42,0.14)] backdrop-blur-xl">
         <aside className="hidden w-[300px] border-r border-slate-200/80 bg-[linear-gradient(180deg,#0f172a_0%,#111827_38%,#172036_100%)] text-slate-100 lg:flex lg:flex-col">
-          <div className="border-b border-white/10 px-6 py-6">
-            <div className="flex items-center gap-3">
-              <div className="rounded-2xl bg-sky-500/15 p-3 text-sky-200 ring-1 ring-inset ring-sky-300/20">
-                <Building2 className="size-6" />
-              </div>
-              <div>
-                <p className="text-[11px] font-semibold tracking-[0.26em] text-sky-200/80 uppercase">
-                  Employee Intranet
-                </p>
-                <h1 className="text-xl font-semibold tracking-tight text-white">Aegis Corp.</h1>
-              </div>
-            </div>
-          </div>
-
-          <nav className="flex-1 px-4 py-5">
-            <Link
-              href="/quests"
-              className="group relative flex w-full items-center gap-3 overflow-hidden rounded-2xl border border-white/10 bg-white/5 px-3 py-3 text-left text-sm text-slate-300 transition hover:bg-white/7 hover:text-white focus-visible:bg-white/7 focus-visible:text-white"
-            >
-              <span className="flex size-10 items-center justify-center rounded-2xl bg-white/6 text-slate-300 transition group-hover:bg-white/8 group-hover:text-white group-focus-visible:bg-white/8 group-focus-visible:text-white">
-                <ClipboardList className="size-4.5" />
-              </span>
-              <span className="flex min-w-0 flex-1 items-center justify-between gap-3">
-                <span className="font-medium tracking-[0.01em]">할당 업무</span>
-                <span className="flex size-6 shrink-0 animate-pulse items-center justify-center rounded-full bg-red-500 text-[11px] font-semibold text-white shadow-[0_0_0_0_rgba(239,68,68,0.45)] transition group-hover:scale-105">
-                  3
-                </span>
-              </span>
-            </Link>
-
-            <div className="mt-4 h-px bg-white/10" />
-
-            <div className="mt-4 space-y-1">
-              {sidebarLinks.map(({ label, icon: Icon, active, href }) => (
-                <Link
-                  key={label}
-                  href={href}
-                  className={`flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition ${
-                    active === true
-                      ? "bg-sky-400/12 text-white ring-1 ring-inset ring-sky-300/30"
-                      : "text-slate-300 hover:bg-white/6 hover:text-white focus-visible:bg-white/6 focus-visible:text-white"
-                  }`}
-                >
-                  <span
-                    className={`flex size-10 items-center justify-center rounded-2xl ${
-                      active === true ? "bg-sky-400/14 text-sky-100" : "bg-white/6 text-slate-300"
-                    }`}
-                  >
-                    <Icon className="size-4.5" />
-                  </span>
-                  <span>{label}</span>
-                </Link>
-              ))}
-            </div>
-          </nav>
+          <RootNavigation />
         </aside>
 
         <div className="flex min-w-0 flex-1 flex-col">
           <header className="border-b border-slate-200/80 bg-white/88 px-5 py-5 backdrop-blur sm:px-6 lg:px-8">
             <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
               <div className="min-w-0">
+                <div className="mb-4 lg:hidden">
+                  <MobileRootNavigation />
+                </div>
                 <div className="flex flex-wrap items-center gap-2 text-xs font-semibold tracking-[0.2em] text-sky-700 uppercase">
                   <span className="rounded-full border border-sky-200 bg-sky-50 px-3 py-1">
                     운영 관리

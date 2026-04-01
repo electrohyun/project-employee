@@ -11,9 +11,10 @@ export function formatIntranetDateLabel(date: Date) {
     timeZone: "Asia/Seoul",
   }).format(date);
 
-  const year = dateParts.find((part) => part.type === "year")?.value;
-  const month = dateParts.find((part) => part.type === "month")?.value;
-  const day = dateParts.find((part) => part.type === "day")?.value;
+  const year = dateParts.find((part) => part.type === "year")?.value ?? "0000";
+  const month = dateParts.find((part) => part.type === "month")?.value ?? "00";
+  const day = dateParts.find((part) => part.type === "day")?.value ?? "00";
+  const safeWeekday = weekday || "---";
 
-  return `${year}. ${month}. ${day}. ${weekday}`;
+  return `${year}. ${month}. ${day}. ${safeWeekday}`;
 }

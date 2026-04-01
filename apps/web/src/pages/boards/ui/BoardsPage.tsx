@@ -12,7 +12,13 @@ export function BoardsPage({ board, post }: BoardsPageProps) {
     notFound();
   }
 
-  const selectedPost = boardData.posts.find((item) => item.slug === post) ?? boardData.posts[0];
+  const selectedPost = post
+    ? boardData.posts.find((item) => item.slug === post)
+    : boardData.posts[0];
+
+  if (!selectedPost) {
+    notFound();
+  }
 
   return (
     <main className="min-h-screen bg-[linear-gradient(180deg,#d9e4ee_0%,#eef4f8_18%,#f6f8fb_100%)] px-4 py-5 text-slate-900 sm:px-6">
@@ -56,6 +62,7 @@ export function BoardsPage({ board, post }: BoardsPageProps) {
                   <li key={item.slug}>
                     <Link
                       href={`/boards/${boardKey}?post=${item.slug}`}
+                      aria-current={isActive ? "page" : undefined}
                       className={`block rounded-2xl border px-4 py-4 transition ${
                         isActive
                           ? "border-sky-200 bg-sky-50/80"
