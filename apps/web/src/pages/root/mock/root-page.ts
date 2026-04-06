@@ -7,6 +7,7 @@ import {
   UserRoundCog,
   Users,
 } from "lucide-react";
+
 import type { BoardSection, IncidentFeedItem, SidebarLink, SummarySlide } from "../model/types";
 
 export const summarySlides: readonly SummarySlide[] = [

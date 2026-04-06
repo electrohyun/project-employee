@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 
 import { QuestCelebrationProvider } from "@/shared/lib/quest-celebration";
+
 import { QueryProvider } from "./queryClient";
 
 interface AppProvidersProps {

@@ -1,10 +1,11 @@
 "use server";
 
-import {
-  completeLoginSuccessQuest,
-  type CompletedQuest,
-} from "@/shared/lib/server/quest-progress";
 import { getCurrentPlayerId } from "@/shared/lib/server/player-session";
+import {
+  completeLoginSuccessQuest
+  
+} from "@/shared/lib/server/quest-progress";
+import type {CompletedQuest} from "@/shared/lib/server/quest-progress";
 
 interface CompleteLoginSuccessQuestResult {
   completedQuests: CompletedQuest[];

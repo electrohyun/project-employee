@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+
 import "./globals.css";
 import { AppProviders } from "@/app/providers";
 import { ChatWidget } from "@/shared/ui/chat-widget";

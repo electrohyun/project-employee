@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { MessageSquareMore, Minimize2, Search, SendHorizontal } from "lucide-react";
+import { useState } from "react";
 
 import { Button } from "../button";
 import { Input } from "../input";

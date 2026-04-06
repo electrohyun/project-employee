@@ -1,4 +1,5 @@
 import { BadgeCheck, Building2, ShieldCheck } from "lucide-react";
+
 import { LoginForm } from "./LoginForm";
 
 interface LoginPageProps {

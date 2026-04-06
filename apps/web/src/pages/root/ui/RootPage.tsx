@@ -5,13 +5,15 @@ import {
   FileSearch,
 } from "lucide-react";
 import Link from "next/link";
-import { boardSections, incidentFeed, summarySlides } from "../mock/root-page";
+
 import { formatIntranetDateLabel } from "@/shared/lib/date";
 import { Button } from "@/shared/ui/button";
+
 import { LiveOperationsStatus } from "./LiveOperationsStatus";
 import { MobileRootNavigation } from "./MobileRootNavigation";
 import { RootNavigation } from "./RootNavigation";
 import { SummarySlider } from "./SummarySlider";
+import { boardSections, incidentFeed, summarySlides } from "../mock/root-page";
 
 const gameDateLabel = formatIntranetDateLabel(new Date());
 const operatorLevel = 1;
