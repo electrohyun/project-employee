@@ -2,7 +2,9 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowRight, KeyRound, UserRound } from "lucide-react";
+import { ArrowRight, KeyRound, LoaderCircle, UserRound } from "lucide-react";
+import { completeLoginSuccessQuestAction } from "../model/complete-login-success-quest";
+import { useQuestCelebration } from "@/shared/lib/quest-celebration";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 
@@ -14,10 +16,14 @@ const sessionBootstrapErrorMessage =
   "세션을 준비하지 못했습니다. 잠시 후 다시 시도하거나 관리자에게 문의하세요.";
 const sessionLoadErrorMessage =
   "기존 세션을 확인하지 못했습니다. 잠시 후 다시 시도하거나 관리자에게 문의하세요.";
+const loginQuestUnexpectedErrorMessage =
+  "로그인 처리 중 문제가 발생했습니다. 잠시 후 다시 시도하거나 관리자에게 문의하세요.";
 
 export function LoginForm({ error }: LoginFormProps) {
   const router = useRouter();
+  const { celebrate } = useQuestCelebration();
   const [isPending, startTransition] = useTransition();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [employeeId, setEmployeeId] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -32,9 +38,14 @@ export function LoginForm({ error }: LoginFormProps) {
         : "";
   const visibleErrorMessage = errorMessage || serverErrorMessage;
   const hasError = Boolean(visibleErrorMessage);
+  const isBusy = isSubmitting || isPending;
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (isBusy) {
+      return;
+    }
 
     if (!demoEmployeeId || !demoEmployeePassword) {
       setErrorMessage("로그인 계정이 아직 설정되지 않았습니다. 관리자에게 문의하세요.");
@@ -49,13 +60,31 @@ export function LoginForm({ error }: LoginFormProps) {
     }
 
     setErrorMessage("");
-    startTransition(() => {
-      router.push("/");
-    });
+    setIsSubmitting(true);
+
+    try {
+      const result = await completeLoginSuccessQuestAction();
+
+      if (result.error) {
+        setErrorMessage(result.error);
+        return;
+      }
+
+      celebrate(result.completedQuests);
+
+      startTransition(() => {
+        router.replace("/");
+      });
+    } catch (error) {
+      console.error("Failed to submit login form.", error);
+      setErrorMessage(loginQuestUnexpectedErrorMessage);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
+    <form className="mt-8 space-y-5" onSubmit={handleSubmit} aria-busy={isBusy}>
       <div className="space-y-2">
         <label htmlFor="employee-id" className="text-sm font-medium text-slate-700">
           아이디
@@ -70,6 +99,7 @@ export function LoginForm({ error }: LoginFormProps) {
             autoComplete="username"
             aria-invalid={hasError}
             aria-describedby={hasError ? errorMessageId : undefined}
+            disabled={isBusy}
             value={employeeId}
             onChange={(event) => setEmployeeId(event.target.value)}
           />
@@ -98,6 +128,7 @@ export function LoginForm({ error }: LoginFormProps) {
             autoComplete="current-password"
             aria-invalid={hasError}
             aria-describedby={hasError ? errorMessageId : undefined}
+            disabled={isBusy}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
@@ -123,22 +154,36 @@ export function LoginForm({ error }: LoginFormProps) {
         <Button
           type="submit"
           size="lg"
-          disabled={isPending}
+          disabled={isBusy}
           className="h-11 w-full bg-sky-600 font-semibold text-white shadow-lg shadow-sky-200 hover:bg-sky-500"
         >
-          {isPending ? "이동 중..." : "로그인"}
-          <ArrowRight className="size-4 transition-transform group-hover/button:translate-x-0.5" />
+          {isBusy ? (
+            <>
+              <LoaderCircle className="size-4 animate-spin" />
+              인증 확인 중...
+            </>
+          ) : (
+            <>
+              로그인
+              <ArrowRight className="size-4 transition-transform group-hover/button:translate-x-0.5" />
+            </>
+          )}
         </Button>
 
         <Button
           type="button"
           variant="outline"
           size="lg"
+          disabled={isBusy}
           className="h-11 w-full border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
         >
           게스트 로그인
         </Button>
       </div>
+
+      <p className="sr-only" aria-live="polite">
+        {isBusy ? "로그인 정보를 확인하고 퀘스트 완료를 처리하는 중입니다." : ""}
+      </p>
     </form>
   );
 }

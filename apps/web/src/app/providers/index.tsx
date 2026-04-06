@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 
+import { QuestCelebrationProvider } from "@/shared/lib/quest-celebration";
 import { QueryProvider } from "./queryClient";
 
 interface AppProvidersProps {
@@ -9,5 +10,9 @@ interface AppProvidersProps {
 }
 
 export function AppProviders({ children }: AppProvidersProps) {
-  return <QueryProvider>{children}</QueryProvider>;
+  return (
+    <QueryProvider>
+      <QuestCelebrationProvider>{children}</QuestCelebrationProvider>
+    </QueryProvider>
+  );
 }
