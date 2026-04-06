@@ -43,16 +43,21 @@ async function createPlayer() {
 }
 
 export async function getCurrentPlayerId() {
-  const cookieStore = await cookies();
-  const playerId = cookieStore.get(PLAYER_SESSION_COOKIE_NAME)?.value;
+  try {
+    const cookieStore = await cookies();
+    const playerId = cookieStore.get(PLAYER_SESSION_COOKIE_NAME)?.value;
 
-  if (!playerId || !isValidPlayerId(playerId)) {
-    return null;
+    if (!playerId || !isValidPlayerId(playerId)) {
+      return null;
+    }
+
+    const player = await findPlayerById(playerId);
+
+    return player?.id ?? null;
+  } catch (error) {
+    console.error("Failed to resolve current player session.", error);
+    throw new Error("Failed to resolve current player session.");
   }
-
-  const player = await findPlayerById(playerId);
-
-  return player?.id ?? null;
 }
 
 export async function ensurePlayerSession() {

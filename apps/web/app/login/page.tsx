@@ -4,12 +4,29 @@ import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
-export default async function Page() {
-  const playerId = await getCurrentPlayerId();
+interface LoginPageProps {
+  searchParams: Promise<{
+    error?: string;
+  }>;
+}
 
-  if (!playerId) {
+export default async function Page({ searchParams }: LoginPageProps) {
+  const { error } = await searchParams;
+  let playerId: string | null = null;
+  let pageError = error;
+
+  try {
+    playerId = await getCurrentPlayerId();
+  } catch {
+    pageError = "session-load-failed";
+  }
+
+  const hasSessionError =
+    pageError === "session-init-failed" || pageError === "session-load-failed";
+
+  if (!playerId && !hasSessionError) {
     redirect("/login/bootstrap");
   }
 
-  return <LoginPage />;
+  return <LoginPage error={pageError} />;
 }

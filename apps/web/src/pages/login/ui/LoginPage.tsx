@@ -1,7 +1,11 @@
 import { BadgeCheck, Building2, ShieldCheck } from "lucide-react";
 import { LoginForm } from "./LoginForm";
 
-export function LoginPage() {
+interface LoginPageProps {
+  error?: string;
+}
+
+export function LoginPage({ error }: LoginPageProps) {
   return (
     <main className="relative min-h-screen overflow-hidden bg-linear-to-br from-slate-100 via-sky-50 to-cyan-100 px-4 py-10 text-slate-900 sm:px-6 lg:px-8">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(14,165,233,0.18),_transparent_32%),radial-gradient(circle_at_bottom_right,_rgba(16,185,129,0.15),_transparent_28%)]" />
@@ -86,7 +90,7 @@ export function LoginPage() {
             </p>
           </div>
 
-          <LoginForm />
+          <LoginForm error={error} />
 
           <div className="mt-8 flex items-center justify-between border-t border-slate-200 pt-5 text-xs text-slate-500">
             <span>System Status: Online</span>
