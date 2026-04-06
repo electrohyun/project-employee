@@ -2,8 +2,8 @@
 
 import type { ReactNode } from "react";
 
+import { QuestCelebrationProvider } from "@/shared/lib/quest-celebration";
 import { QueryProvider } from "./queryClient";
-import { QuestCelebrationProvider } from "./quest-celebration";
 
 interface AppProvidersProps {
   children: ReactNode;

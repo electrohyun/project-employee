@@ -4,7 +4,7 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, KeyRound, LoaderCircle, UserRound } from "lucide-react";
 import { completeLoginSuccessQuestAction } from "../model/complete-login-success-quest";
-import { useQuestCelebration } from "@/app/providers/quest-celebration";
+import { useQuestCelebration } from "@/shared/lib/quest-celebration";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 
@@ -16,6 +16,8 @@ const sessionBootstrapErrorMessage =
   "세션을 준비하지 못했습니다. 잠시 후 다시 시도하거나 관리자에게 문의하세요.";
 const sessionLoadErrorMessage =
   "기존 세션을 확인하지 못했습니다. 잠시 후 다시 시도하거나 관리자에게 문의하세요.";
+const loginQuestUnexpectedErrorMessage =
+  "로그인 처리 중 문제가 발생했습니다. 잠시 후 다시 시도하거나 관리자에게 문의하세요.";
 
 export function LoginForm({ error }: LoginFormProps) {
   const router = useRouter();
@@ -73,6 +75,9 @@ export function LoginForm({ error }: LoginFormProps) {
       startTransition(() => {
         router.replace("/");
       });
+    } catch (error) {
+      console.error("Failed to submit login form.", error);
+      setErrorMessage(loginQuestUnexpectedErrorMessage);
     } finally {
       setIsSubmitting(false);
     }
