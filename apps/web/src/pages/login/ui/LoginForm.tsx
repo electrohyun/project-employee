@@ -6,7 +6,16 @@ import { ArrowRight, KeyRound, UserRound } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 
-export function LoginForm() {
+interface LoginFormProps {
+  error?: string;
+}
+
+const sessionBootstrapErrorMessage =
+  "세션을 준비하지 못했습니다. 잠시 후 다시 시도하거나 관리자에게 문의하세요.";
+const sessionLoadErrorMessage =
+  "기존 세션을 확인하지 못했습니다. 잠시 후 다시 시도하거나 관리자에게 문의하세요.";
+
+export function LoginForm({ error }: LoginFormProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [employeeId, setEmployeeId] = useState("");
@@ -15,7 +24,14 @@ export function LoginForm() {
   const demoEmployeeId = process.env.NEXT_PUBLIC_DEMO_EMPLOYEE_ID;
   const demoEmployeePassword = process.env.NEXT_PUBLIC_DEMO_EMPLOYEE_PASSWORD;
   const errorMessageId = "login-error";
-  const hasError = Boolean(errorMessage);
+  const serverErrorMessage =
+    error === "session-init-failed"
+      ? sessionBootstrapErrorMessage
+      : error === "session-load-failed"
+        ? sessionLoadErrorMessage
+        : "";
+  const visibleErrorMessage = errorMessage || serverErrorMessage;
+  const hasError = Boolean(visibleErrorMessage);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -49,7 +65,7 @@ export function LoginForm() {
           <Input
             id="employee-id"
             type="text"
-            placeholder="aegis-0123"
+            placeholder="아이디를 입력하세요"
             className="pl-10"
             autoComplete="username"
             aria-invalid={hasError}
@@ -99,7 +115,7 @@ export function LoginForm() {
           aria-live="assertive"
           className="rounded-2xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm text-rose-900"
         >
-          {errorMessage}
+          {visibleErrorMessage}
         </div>
       ) : null}
 
