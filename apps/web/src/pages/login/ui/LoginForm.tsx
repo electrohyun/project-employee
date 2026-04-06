@@ -1,9 +1,11 @@
 "use client";
 
 import { ArrowRight, KeyRound, LoaderCircle, UserRound } from "lucide-react";
-import { useLoginForm } from "../model/useLoginForm";
+
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
+
+import { useLoginForm } from "../model/useLoginForm";
 
 interface LoginFormProps {
   error?: string;

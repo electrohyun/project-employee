@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   BadgeAlert,
   ChevronLeft,
@@ -9,6 +8,8 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+
 import type { SummarySlide } from "../model/types";
 
 const iconMap = {

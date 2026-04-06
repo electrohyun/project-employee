@@ -1,5 +1,6 @@
 import { Building2, ClipboardList } from "lucide-react";
 import Link from "next/link";
+
 import { sidebarLinks } from "../mock/root-page";
 
 interface RootNavigationProps {

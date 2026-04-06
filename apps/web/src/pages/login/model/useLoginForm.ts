@@ -1,9 +1,12 @@
 "use client";
 
-import { type FormEvent, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { completeLoginSuccessQuestAction } from "./complete-login-success-quest";
+import { useState, useTransition } from "react";
+import type { FormEvent } from "react";
+
 import { useQuestCelebration } from "@/shared/lib/quest-celebration";
+
+import { completeLoginSuccessQuestAction } from "./complete-login-success-quest";
 
 const sessionBootstrapErrorMessage =
   "세션을 준비하지 못했습니다. 잠시 후 다시 시도하거나 관리자에게 문의하세요.";

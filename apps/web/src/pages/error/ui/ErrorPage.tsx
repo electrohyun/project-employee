@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { AlertTriangle, Building2, RotateCcw } from "lucide-react";
+import Link from "next/link";
 
 import { Button } from "@/shared/ui/button";
 

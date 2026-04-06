@@ -1,7 +1,9 @@
 import { ArrowLeft, ChevronRight, FileText, FolderOpenDot } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { boardDirectory, type BoardKey } from "../mock/board-directory";
+
+import { boardDirectory } from "../mock/board-directory";
+import type { BoardKey } from "../mock/board-directory";
 import type { BoardsPageProps } from "../model/types";
 
 export function BoardsPage({ board, post }: BoardsPageProps) {

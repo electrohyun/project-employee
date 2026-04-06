@@ -7,10 +7,12 @@ import {
   useEffect,
   useMemo,
   useRef,
-  useState,
-  type CSSProperties,
-  type ReactNode,
+  useState
+  
+  
 } from "react";
+import type {CSSProperties, ReactNode} from "react";
+
 import type { CompletedQuest } from "@/shared/lib/server/quest-progress";
 
 interface QuestCelebrationContextValue {

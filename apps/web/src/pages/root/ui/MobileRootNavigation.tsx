@@ -2,6 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+
 import { RootNavigation } from "./RootNavigation";
 
 export function MobileRootNavigation() {
