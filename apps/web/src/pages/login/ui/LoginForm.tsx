@@ -3,6 +3,8 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, KeyRound, UserRound } from "lucide-react";
+import { completeLoginSuccessQuestAction } from "../model/complete-login-success-quest";
+import { useQuestCelebration } from "@/app/providers/quest-celebration";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 
@@ -17,6 +19,7 @@ const sessionLoadErrorMessage =
 
 export function LoginForm({ error }: LoginFormProps) {
   const router = useRouter();
+  const { celebrate } = useQuestCelebration();
   const [isPending, startTransition] = useTransition();
   const [employeeId, setEmployeeId] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +36,7 @@ export function LoginForm({ error }: LoginFormProps) {
   const visibleErrorMessage = errorMessage || serverErrorMessage;
   const hasError = Boolean(visibleErrorMessage);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!demoEmployeeId || !demoEmployeePassword) {
@@ -49,8 +52,17 @@ export function LoginForm({ error }: LoginFormProps) {
     }
 
     setErrorMessage("");
+    const result = await completeLoginSuccessQuestAction();
+
+    if (result.error) {
+      setErrorMessage(result.error);
+      return;
+    }
+
+    celebrate(result.completedQuests);
+
     startTransition(() => {
-      router.push("/");
+      router.replace("/");
     });
   };
 
