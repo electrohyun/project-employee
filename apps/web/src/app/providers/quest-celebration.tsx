@@ -55,6 +55,7 @@ interface QuestCelebrationProviderProps {
 
 export function QuestCelebrationProvider({ children }: QuestCelebrationProviderProps) {
   const timeoutRef = useRef<number | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const [activeCelebration, setActiveCelebration] = useState<ActiveCelebration | null>(null);
 
   const clearCelebration = useCallback(() => {
@@ -94,6 +95,26 @@ export function QuestCelebrationProvider({ children }: QuestCelebrationProviderP
     };
   }, []);
 
+  useEffect(() => {
+    if (!activeCelebration) {
+      return;
+    }
+
+    closeButtonRef.current?.focus();
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        clearCelebration();
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [activeCelebration, clearCelebration]);
+
   const contextValue = useMemo(
     () => ({
       celebrate,
@@ -130,13 +151,18 @@ export function QuestCelebrationProvider({ children }: QuestCelebrationProviderP
             />
           ))}
 
-          <div className="quest-celebration-pop pointer-events-auto relative w-full max-w-md overflow-hidden rounded-[1.75rem] border border-white/40 bg-[linear-gradient(145deg,rgba(15,23,42,0.96)_0%,rgba(12,74,110,0.94)_58%,rgba(21,128,61,0.92)_100%)] px-5 py-5 text-white shadow-[0_24px_80px_rgba(15,23,42,0.34)] backdrop-blur-xl sm:px-6">
+          <div
+            className="quest-celebration-pop pointer-events-auto relative w-full max-w-md overflow-hidden rounded-[1.75rem] border border-white/40 bg-[linear-gradient(145deg,rgba(15,23,42,0.96)_0%,rgba(12,74,110,0.94)_58%,rgba(21,128,61,0.92)_100%)] px-5 py-5 text-white shadow-[0_24px_80px_rgba(15,23,42,0.34)] backdrop-blur-xl sm:px-6"
+            aria-modal="true"
+            aria-labelledby="quest-celebration-title"
+            role="dialog"
+          >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.22),_transparent_34%),radial-gradient(circle_at_bottom_right,_rgba(103,232,249,0.18),_transparent_28%)]" />
             <div className="relative">
               <p className="text-[11px] font-semibold tracking-[0.26em] text-sky-100/85 uppercase">
                 Quest Complete
               </p>
-              <h3 className="mt-2 text-2xl font-semibold tracking-tight text-white">
+              <h3 id="quest-celebration-title" className="mt-2 text-2xl font-semibold tracking-tight text-white">
                 퀘스트 완료!
               </h3>
               {firstQuest ? (
@@ -151,9 +177,10 @@ export function QuestCelebrationProvider({ children }: QuestCelebrationProviderP
               </div>
             </div>
             <button
+              ref={closeButtonRef}
               type="button"
               onClick={clearCelebration}
-              className="absolute top-3 right-3 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/12 bg-white/8 text-sm text-white/80 transition hover:bg-white/14 hover:text-white"
+              className="absolute top-3 right-3 inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/12 bg-white/8 text-sm text-white/80 transition outline-none hover:bg-white/14 hover:text-white focus-visible:border-sky-200/70 focus-visible:ring-4 focus-visible:ring-sky-100/25"
               aria-label="축하 메시지 닫기"
             >
               ×
