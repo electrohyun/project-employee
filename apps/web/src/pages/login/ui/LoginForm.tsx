@@ -49,7 +49,7 @@ export function LoginForm() {
           <Input
             id="employee-id"
             type="text"
-            placeholder="aegis-0123"
+            placeholder="아이디를 입력하세요"
             className="pl-10"
             autoComplete="username"
             aria-invalid={hasError}
