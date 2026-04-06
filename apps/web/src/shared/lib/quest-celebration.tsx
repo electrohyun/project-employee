@@ -130,7 +130,7 @@ export function QuestCelebrationProvider({ children }: QuestCelebrationProviderP
     <QuestCelebrationContext.Provider value={contextValue}>
       {children}
       {activeCelebration ? (
-        <div className="pointer-events-none fixed inset-0 z-[9999] flex items-start justify-center overflow-hidden px-4 pt-14 sm:pt-18">
+        <div className="pointer-events-none fixed inset-0 z-[9999] flex items-start justify-center overflow-hidden px-4 pt-14 sm:pt-20">
           <div className="absolute inset-0 bg-white/44 backdrop-blur-[3px]" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.72),_transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.3)_0%,rgba(255,255,255,0.12)_100%)]" />
 
@@ -162,7 +162,10 @@ export function QuestCelebrationProvider({ children }: QuestCelebrationProviderP
               <p className="text-[11px] font-semibold tracking-[0.26em] text-sky-100/85 uppercase">
                 Quest Complete
               </p>
-              <h3 id="quest-celebration-title" className="mt-2 text-2xl font-semibold tracking-tight text-white">
+              <h3
+                id="quest-celebration-title"
+                className="mt-2 text-2xl font-semibold tracking-tight text-white"
+              >
                 퀘스트 완료!
               </h3>
               {firstQuest ? (
