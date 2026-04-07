@@ -18,11 +18,14 @@
 3. [NARRATIVE_OVERVIEW](./product/NARRATIVE_OVERVIEW.md)
 4. [WORLD_BUILDING](./product/WORLD_BUILDING.md)
 5. [EXPERIENCE_PRINCIPLES](./product/EXPERIENCE_PRINCIPLES.md)
-6. [quest-system-prd.md](./quests/quest-system-prd.md)
-7. [ending-axes-prd.md](./quests/ending-axes-prd.md)
-8. [intranet-board-structure-prd.md](./features/intranet-board-structure-prd.md)
-9. [TRACKING_PLAN](./analytics/TRACKING_PLAN.md)
-10. `examples/`는 보존용이므로 현재 요구사항 해석의 기준으로 사용하지 않습니다.
+6. [DESIGN_WORKFLOW](./product/DESIGN_WORKFLOW.md)
+7. [AGENT_PLAYBOOK](./product/AGENT_PLAYBOOK.md)
+8. [PROMPT_RECIPES](./product/PROMPT_RECIPES.md)
+9. [quest-system-prd.md](./quests/quest-system-prd.md)
+10. [ending-axes-prd.md](./quests/ending-axes-prd.md)
+11. [intranet-board-structure-prd.md](./features/intranet-board-structure-prd.md)
+12. [TRACKING_PLAN](./analytics/TRACKING_PLAN.md)
+13. `examples/`는 보존용이므로 현재 요구사항 해석의 기준으로 사용하지 않습니다.
 
 ## 이 프로젝트를 읽는 관점
 
@@ -36,6 +39,9 @@
 
 즉 하나의 요청은 보통 단일 문서만 읽고 답하지 않습니다.
 필요에 따라 `product/`, `quests/`, `features/`, `analytics/`, `tech/`, `adr/`를 함께 참고합니다.
+
+특히 `product/`는 단순한 세계관 소개 폴더가 아니라, 제품 기획의 기준 문서가 모이는 곳으로 해석합니다.
+핵심 경험 정의, 사용자 흐름, 화면 구조, 정보 설계, 디자인 방향처럼 구현 이전의 제품 판단이 필요한 내용도 우선 `product/`에서 정리합니다.
 
 ## 예시 해석
 
@@ -51,6 +57,7 @@
 ## 문서 해석 원칙
 
 - `product/`는 이 서비스가 어떤 경험을 주려는지, 어떤 서사 방향과 세계관 규칙을 가졌는지 설명합니다.
+- `product/`는 동시에 제품 기획의 기준 레이어로 사용하며, 사용자 흐름, 핵심 화면 구조, 정보 설계, 디자인 방향 같은 상위 판단 문서도 포함할 수 있습니다.
 - `quests/`는 사용자가 무엇을 해결하고 어떤 서사 반응을 받는지 설명합니다.
 - `features/`는 사용자가 실제로 어떤 입력과 상호작용을 수행하는지 설명합니다.
 - `analytics/`는 경험이 의도대로 작동하는지 무엇으로 판단할지 설명합니다.
@@ -61,7 +68,7 @@
 
 ## 디렉터리 구조
 
-- `product/`: 프로젝트 개요, 코어 루프, 사용자 흐름, 서사 방향, 세계관 규칙
+- `product/`: 프로젝트 개요, 코어 루프, 사용자 흐름, 핵심 화면 구조, 정보 설계, 디자인 방향, 제품 설계 워크플로, 에이전트 협업 플레이북, 프롬프트 레시피, 서사 방향, 세계관 규칙
 - `features/`: 사용자의 입력과 화면 상호작용을 구성하는 기능 PRD
 - `quests/`: 퀘스트 구조, 완료 조건, 서사 반응을 다루는 문서
 - `analytics/`: 이벤트 측정 기준과 성공 지표
