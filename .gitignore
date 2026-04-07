@@ -44,3 +44,11 @@ skills-lock.json
 
 *storybook.log
 storybook-static
+
+# Docs
+# Only keep the root README and template files trackable under docs/.
+docs/**
+!docs/
+!docs/README.md
+!docs/**/
+!docs/**/*_TEMPLATE.md
